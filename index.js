@@ -101,4 +101,8 @@ function heredoc(strings, ...args) {
     return lines.join('\n');
 }
 
-module.exports = heredoc;
+if (typeof module !== 'undefined') {
+    module.exports = heredoc;
+} else if (typeof window !== 'undefined') {
+    window.heredoc = heredoc;
+}
