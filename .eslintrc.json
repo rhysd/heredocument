@@ -1,0 +1,21 @@
+{
+  "extends": ["eslint:recommended", "plugin:node/recommended"],
+  "env": {
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
+  "plugins": [
+    "promise",
+    "node"
+  ],
+  "rules": {
+    "indent": ["error", 4],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "comma-dangle": ["error", "never"],
+    "promise/param-names": "error",
+    "promise/always-return": "error",
+    "promise/catch-or-return": "error"
+  }
+}

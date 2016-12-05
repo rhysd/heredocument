@@ -1,0 +1,35 @@
+{
+  "name": "heredoc-template",
+  "version": "0.0.0",
+  "description": "Here document on ES2015 template string literals",
+  "main": "index.js",
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "lint": "eslint index.js test/*.js",
+    "test": "mocha test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhysd/heredoc-template.git"
+  },
+  "keywords": [
+    "heredoc",
+    "unindent",
+    "multiline",
+    "string"
+  ],
+  "author": "rhysd <lin90162@yahoo.co.jp>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rhysd/heredoc-template/issues"
+  },
+  "homepage": "https://github.com/rhysd/heredoc-template#readme",
+  "devDependencies": {
+    "eslint": "^3.11.1",
+    "eslint-plugin-node": "^3.0.5",
+    "eslint-plugin-promise": "^3.4.0",
+    "mocha": "^3.2.0"
+  }
+}
