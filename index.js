@@ -15,7 +15,8 @@ function getTrimmedLines(strings, args) {
     const lines = input.join('').split('\n');
 
     // Note: Trim first/last lines
-    if (lines.length > 0 && RE_EMPTY_LINE.test(lines[0])) {
+    if (lines.length > 0 && lines[0].length === 0) {
+        // Newline just after first ` it should be split to ''
         lines.shift();
     }
     if (lines.length > 0 && RE_EMPTY_LINE.test(lines[lines.length - 1])) {
