@@ -28,9 +28,10 @@ function getTrimmedLines(strings, args) {
 function indentOf(line) {
     let count = 0;
     for (let i = 0; i < line.length; ++i) {
-        if (line[i] === ' ') {
+        const c = line[i];
+        if (c === ' ') {
             count += 1;
-        } else if (line[i] === '\t') {
+        } else if (c === '\t') {
             count += 8;
         } else {
             break;
@@ -39,14 +40,16 @@ function indentOf(line) {
     return count;
 }
 
+// Precondition: lines.length > 0
 function getPadLength(lines) {
-    let pad = 0;
-    lines.forEach(line => {
-        if (line.length === 0) {
-            return; // Continue
+    let pad = indentOf(lines[0]);
+    for (let i = 1; i < lines.length; ++i) {
+        const l = lines[i];
+        if (l.length === 0) {
+            continue;
         }
-        pad = indentOf(line);
-    });
+        pad = Math.min(pad, indentOf(l));
+    }
     return pad;
 }
 
@@ -58,7 +61,7 @@ function charsToSlice(line, pad) {
         } else if (line[idx] === '\t') {
             pad -= 8;
         } else {
-            throw Error(`FATAL: Char is not whitespace: '${line[idx]}' at ${idx} in '${line}'`);
+            throw Error(`FATAL: Char is not whitespace: '${line[idx]}' at ${idx} in '${line}' (pad: ${pad})`);
         }
         ++idx;
     }
@@ -72,17 +75,22 @@ function charsToSlice(line, pad) {
 
 function heredoc(strings, ...args) {
     const lines = getTrimmedLines(strings, args);
+    if (lines.length === 0) {
+        return '';
+    }
+
     const pad = getPadLength(lines);
     if (pad <= 0) {
         return lines.join('\n');
     }
 
     for (let i = 0; i < lines.length; ++i) {
-        if (lines[i].length === 0) {
+        const l = lines[i];
+        if (l.length === 0) {
             continue;
         }
-        const counts = charsToSlice(lines[i], pad);
-        let line = lines[i].slice(counts[0]);
+        const counts = charsToSlice(l, pad);
+        let line = l.slice(counts[0]);
         if (counts[1] !== undefined) {
             line = ' '.repeat(counts[1]) + line;
         }
