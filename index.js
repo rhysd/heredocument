@@ -2,6 +2,9 @@
 // TODO: Customizable tab size
 
 const RE_EMPTY_LINE = /^\s*$/;
+const DEFAULT_OPTIONS = {
+    tabSize: 8
+};
 
 function getTrimmedLines(strings, args) {
     const input = [];
@@ -26,14 +29,14 @@ function getTrimmedLines(strings, args) {
     return lines;
 }
 
-function indentOf(line) {
+function indentOf(line, opts) {
     let count = 0;
     for (let i = 0; i < line.length; ++i) {
         const c = line[i];
         if (c === ' ') {
             count += 1;
         } else if (c === '\t') {
-            count += 8;
+            count += opts.tabSize;
         } else {
             break;
         }
@@ -42,25 +45,25 @@ function indentOf(line) {
 }
 
 // Precondition: lines.length > 0
-function getPadLength(lines) {
-    let pad = indentOf(lines[0]);
+function getPadLength(lines, opts) {
+    let pad = indentOf(lines[0], opts);
     for (let i = 1; i < lines.length; ++i) {
         const l = lines[i];
         if (l.length === 0) {
             continue;
         }
-        pad = Math.min(pad, indentOf(l));
+        pad = Math.min(pad, indentOf(l, opts));
     }
     return pad;
 }
 
-function charsToSlice(line, pad) {
+function charsToSlice(line, pad, opts) {
     let idx = 0;
     while (pad > 0) {
         if (line[idx] === ' ') {
             pad -= 1;
         } else if (line[idx] === '\t') {
-            pad -= 8;
+            pad -= opts.tabSize;
         } else {
             throw Error(`FATAL: Char is not whitespace: '${line[idx]}' at ${idx} in '${line}' (pad: ${pad})`);
         }
@@ -75,12 +78,21 @@ function charsToSlice(line, pad) {
 }
 
 function heredoc(strings, ...args) {
+    if (!Array.isArray(strings)) {
+        // When setting up options
+        // e.g.
+        //   const heredoc = require('heredoc-template')({
+        //      tabSize: 4
+        //   });
+        return heredoc.bind(Object.assign({}, DEFAULT_OPTIONS, strings));
+    }
+
     const lines = getTrimmedLines(strings, args);
     if (lines.length === 0) {
         return '';
     }
 
-    const pad = getPadLength(lines);
+    const pad = getPadLength(lines, this);
     if (pad <= 0) {
         return lines.join('\n');
     }
@@ -90,7 +102,7 @@ function heredoc(strings, ...args) {
         if (l.length === 0) {
             continue;
         }
-        const counts = charsToSlice(l, pad);
+        const counts = charsToSlice(l, pad, this);
         let line = l.slice(counts[0]);
         if (counts[1] !== undefined) {
             line = ' '.repeat(counts[1]) + line;
@@ -102,7 +114,7 @@ function heredoc(strings, ...args) {
 }
 
 if (typeof module !== 'undefined') {
-    module.exports = heredoc;
+    module.exports = heredoc.bind(DEFAULT_OPTIONS);
 } else if (typeof window !== 'undefined') {
-    window.heredoc = heredoc;
+    window.heredoc = heredoc.bind(DEFAULT_OPTIONS);
 }
