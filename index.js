@@ -1,11 +1,10 @@
-// XXX: Should \n\r and \r and \n always
-
 const RE_EMPTY_LINE = /^\s*$/;
 const DEFAULT_OPTIONS = {
-    tabSize: 8
+    tabSize: 8,
+    newline: '\n',
 };
 
-function getTrimmedLines(strings, args) {
+function getTrimmedLines(strings, args, opts) {
     const input = [];
     strings.forEach((s, i) => {
         input.push(s);
@@ -14,7 +13,7 @@ function getTrimmedLines(strings, args) {
         }
     });
 
-    const lines = input.join('').split('\n');
+    const lines = input.join('').split(opts.newline);
 
     // Note: Trim first/last lines
     if (lines.length > 0 && lines[0].length === 0) {
@@ -86,14 +85,14 @@ function heredoc(strings, ...args) {
         return heredoc.bind(Object.assign({}, DEFAULT_OPTIONS, strings));
     }
 
-    const lines = getTrimmedLines(strings, args);
+    const lines = getTrimmedLines(strings, args, this);
     if (lines.length === 0) {
         return '';
     }
 
     const pad = getPadLength(lines, this);
     if (pad <= 0) {
-        return lines.join('\n');
+        return lines.join(this.newline);
     }
 
     for (let i = 0; i < lines.length; ++i) {
@@ -109,7 +108,7 @@ function heredoc(strings, ...args) {
         lines[i] = line;
     }
 
-    return lines.join('\n');
+    return lines.join(this.newline);
 }
 
 const exported = heredoc.bind(DEFAULT_OPTIONS);
