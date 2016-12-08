@@ -1,5 +1,4 @@
 // XXX: Should \n\r and \r and \n always
-// TODO: Customizable tab size
 
 const RE_EMPTY_LINE = /^\s*$/;
 const DEFAULT_OPTIONS = {
@@ -113,8 +112,12 @@ function heredoc(strings, ...args) {
     return lines.join('\n');
 }
 
+const exported = heredoc.bind(DEFAULT_OPTIONS);
+exported.DEFAULT_OPTIONS = DEFAULT_OPTIONS;
+
 if (typeof module !== 'undefined') {
-    module.exports = heredoc.bind(DEFAULT_OPTIONS);
+    exported.default = exported;
+    module.exports = exported;
 } else if (typeof window !== 'undefined') {
-    window.heredoc = heredoc.bind(DEFAULT_OPTIONS);
+    window.heredoc = exported;
 }
