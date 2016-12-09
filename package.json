@@ -1,5 +1,5 @@
 {
-  "name": "heredoc-template",
+  "name": "heredocument",
   "version": "0.0.0",
   "description": "Here document on ES2015 template string literals",
   "main": "index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rhysd/heredoc-template.git"
+    "url": "git+https://github.com/rhysd/heredocument.git"
   },
   "keywords": [
     "heredoc",
@@ -23,9 +23,9 @@
   "author": "rhysd <lin90162@yahoo.co.jp>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rhysd/heredoc-template/issues"
+    "url": "https://github.com/rhysd/heredocument/issues"
   },
-  "homepage": "https://github.com/rhysd/heredoc-template#readme",
+  "homepage": "https://github.com/rhysd/heredocument#readme",
   "devDependencies": {
     "eslint": "^3.11.1",
     "eslint-plugin-node": "^3.0.5",

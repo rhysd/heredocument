@@ -80,7 +80,7 @@ function heredoc(strings, ...args) {
     if (!Array.isArray(strings)) {
         // When setting up options
         // e.g.
-        //   const heredoc = require('heredoc-template')({
+        //   const heredoc = require('heredocument')({
         //      tabSize: 4
         //   });
         return heredoc.bind(Object.assign({}, DEFAULT_OPTIONS, strings));
