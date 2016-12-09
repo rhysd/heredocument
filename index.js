@@ -2,6 +2,7 @@ const RE_EMPTY_LINE = /^\s*$/;
 const DEFAULT_OPTIONS = {
     tabSize: 8,
     newline: '\n',
+    oneline: false
 };
 
 function getTrimmedLines(strings, args, opts) {
@@ -108,10 +109,12 @@ function heredoc(strings, ...args) {
         lines[i] = line;
     }
 
-    return lines.join(this.newline);
+    const sep = this.oneline ? ' ' : this.newline;
+    return lines.join(sep);
 }
 
 const exported = heredoc.bind(DEFAULT_OPTIONS);
+exported.oneline = heredoc.bind(Object.assign({}, DEFAULT_OPTIONS, { oneline: true }));
 exported.DEFAULT_OPTIONS = DEFAULT_OPTIONS;
 
 if (typeof module !== 'undefined') {
