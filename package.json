@@ -1,7 +1,7 @@
 {
   "name": "heredocument",
   "version": "0.0.0",
-  "description": "Here document on ES2015 template string literals",
+  "description": "Here document built on ES2015 template string literals like Ruby's <<~",
   "main": "index.js",
   "engines": {
     "node": ">=6"
@@ -23,7 +23,9 @@
     "heredoc",
     "unindent",
     "multiline",
-    "string"
+    "string",
+    "oneline",
+    "ruby"
   ],
   "author": "rhysd <lin90162@yahoo.co.jp>",
   "license": "MIT",
