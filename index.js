@@ -91,9 +91,10 @@ function heredoc(strings, ...args) {
         return '';
     }
 
+    const sep = this.oneline ? ' ' : this.newline;
     const pad = getPadLength(lines, this);
     if (pad <= 0) {
-        return lines.join(this.newline);
+        return lines.join(sep);
     }
 
     for (let i = 0; i < lines.length; ++i) {
@@ -109,7 +110,6 @@ function heredoc(strings, ...args) {
         lines[i] = line;
     }
 
-    const sep = this.oneline ? ' ' : this.newline;
     return lines.join(sep);
 }
 
