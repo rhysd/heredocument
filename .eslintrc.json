@@ -13,12 +13,9 @@
   ],
   "rules": {
     "indent": ["error", 4],
-    "quotes": ["error", "single"],
+    "quotes": ["error", "single", "avoid-escape"],
     "semi": ["error", "always"],
     "comma-dangle": ["error", "never"],
-    "promise/param-names": "error",
-    "promise/always-return": "error",
-    "promise/catch-or-return": "error",
 
     "mocha/handle-done-callback": "error",
     "mocha/max-top-level-suites": "off",
