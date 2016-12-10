@@ -1,7 +1,7 @@
 const heredoc = require('..');
 const equal = require('assert').equal;
 
-describe('heredoc``', function () {
+describe('heredoc`...`', function () {
     it('trims first new line', function () {
         equal(heredoc`
              aaa`, 'aaa');
@@ -75,6 +75,24 @@ bb
 
 cc
         `, 'aa\n\nbb\n\ncc');
+
+        equal(heredoc`
+
+            aa
+            bb
+        `, '\naa\nbb');
+
+        equal(heredoc`
+            aa
+
+            bb
+        `, 'aa\n\nbb');
+
+        equal(heredoc`
+            aa
+            bb
+
+        `, 'aa\nbb\n');
     });
 
     it('can deal with empty line', function () {
@@ -84,6 +102,49 @@ cc
         equal(heredoc`
 
         `, '');
+        equal(heredoc`
+
+
+
+        `, '\n\n');
+    });
+
+    it('deals with tab character as 8 whitespaces', function () {
+        equal(heredoc`
+		foo
+		bar
+		piyo
+        `, 'foo\nbar\npiyo');
+        equal(heredoc`
+		foo
+			bar
+		piyo
+        `, 'foo\n	bar\npiyo');
+        equal(heredoc`
+			foo
+			bar
+		piyo
+        `, '	foo\n	bar\npiyo');
+        equal(heredoc`
+		 foo
+                bar
+		piyo
+        `, ' foo\nbar\npiyo');
+        equal(heredoc`
+		  foo
+		    bar
+			piyo
+        `, 'foo\n  bar\n      piyo');
+        equal(heredoc`
+			foo
+		    bar
+		  piyo
+        `, '      foo\n  bar\npiyo');
+        equal(heredoc`
+	  	foo
+		    bar
+  		  piyo
+        `, 'foo\n  bar\n  piyo');
     });
 });
 

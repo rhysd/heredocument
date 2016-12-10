@@ -41,6 +41,17 @@ describe('oneline`...`', function () {
             bb
              cc
         `, 'aa bb  cc');
+
+        equal(oneline`
+no
+indent
+is removed
+        `, 'no indent is removed');
+
+        // Note: Content is empty
+        equal(oneline``, '');
+        equal(oneline`
+        `, '');
     });
 
     it('can interpolate values in strings', function () {
@@ -61,5 +72,46 @@ describe('oneline`...`', function () {
 		with
 		tab
         `, 'oneline indented with tab');
+    });
+
+    it('skip adding seperator space on empty line', function () {
+        equal(oneline`
+            foo
+
+            baz
+        `, 'foo baz');
+        equal(oneline`
+
+            foo
+            baz
+        `, 'foo baz');
+        equal(oneline`
+            foo
+            baz
+
+        `, 'foo baz');
+    });
+
+    it('deals with tab character as 8 whitespaces', function () {
+        equal(oneline`
+		foo
+		bar
+		piyo
+        `, 'foo bar piyo');
+        equal(oneline`
+		foo
+			bar
+		piyo
+        `, 'foo 	bar piyo');
+        equal(oneline`
+		  foo
+		    bar
+			piyo
+        `, 'foo   bar       piyo');
+        equal(oneline`
+	  	foo
+		    bar
+  		  piyo
+        `, 'foo   bar   piyo');
     });
 });

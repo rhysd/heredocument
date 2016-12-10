@@ -55,7 +55,7 @@ function getPadLength(lines, opts) {
             return;
         }
         pad = Math.min(pad, indentOf(l, opts));
-    })
+    });
 
     // pad < 0 means there are empty lines only
     return pad >= 0 ? pad : 0;
