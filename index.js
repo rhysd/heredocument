@@ -45,15 +45,20 @@ function indentOf(line, opts) {
 
 // Precondition: lines.length > 0
 function getPadLength(lines, opts) {
-    let pad = indentOf(lines[0], opts);
-    for (let i = 1; i < lines.length; ++i) {
-        const l = lines[i];
+    let pad = -1;
+    lines.forEach(l => {
         if (l.length === 0) {
-            continue;
+            return; // continue
+        }
+        if (pad < 0) {
+            pad = indentOf(l, opts);
+            return;
         }
         pad = Math.min(pad, indentOf(l, opts));
-    }
-    return pad;
+    })
+
+    // pad < 0 means there are empty lines only
+    return pad >= 0 ? pad : 0;
 }
 
 function charsToSlice(line, pad, opts) {
@@ -76,6 +81,13 @@ function charsToSlice(line, pad, opts) {
     }
 }
 
+function joinLines(lines, opts) {
+    if (!opts.oneline) {
+        return lines.join(opts.newline);
+    }
+    return lines.filter(l => l.length !== 0).join(' ');
+}
+
 function heredoc(strings, ...args) {
     if (!Array.isArray(strings)) {
         // When setting up options
@@ -91,10 +103,9 @@ function heredoc(strings, ...args) {
         return '';
     }
 
-    const sep = this.oneline ? ' ' : this.newline;
     const pad = getPadLength(lines, this);
     if (pad <= 0) {
-        return lines.join(sep);
+        return joinLines(lines, this);
     }
 
     for (let i = 0; i < lines.length; ++i) {
@@ -110,7 +121,7 @@ function heredoc(strings, ...args) {
         lines[i] = line;
     }
 
-    return lines.join(sep);
+    return joinLines(lines, this);
 }
 
 const exported = heredoc.bind(DEFAULT_OPTIONS);
