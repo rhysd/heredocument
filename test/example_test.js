@@ -23,5 +23,18 @@ describe('heredoc`...`', function () {
 end.`;
 
         equal(s, expected);
+
+        const java = heredoc`
+             あなたとジャバ
+            今すぐダウンロー
+                   ド
+        `;
+
+        const expected_java =
+` あなたとジャバ
+今すぐダウンロー
+       ド`;
+
+        equal(java, expected_java);
     });
 });

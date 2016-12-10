@@ -95,9 +95,10 @@ function heredoc(strings, ...args) {
         return '';
     }
 
+    const newline = this.outputNewline !== undefined ? this.outputNewline : this.inputNewline;
     const pad = getPadLength(lines, this);
     if (pad <= 0) {
-        return lines.join(this.outputNewline || this.inputNewline);
+        return lines.join(newline);
     }
 
     for (let i = 0; i < lines.length; ++i) {
@@ -113,7 +114,7 @@ function heredoc(strings, ...args) {
         lines[i] = line;
     }
 
-    return lines.join(this.outputNewline || this.inputNewline);
+    return lines.join(newline);
 }
 
 const exported = heredoc.bind(DEFAULT_OPTIONS);

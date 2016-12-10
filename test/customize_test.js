@@ -29,5 +29,22 @@ describe('heredoc(options)', function () {
             equal(heredoc`  foo\n bar\n piyo`, ' foo\n\rbar\n\rpiyo');
             equal(heredoc`  foo\n\n bar\n piyo`, ' foo\n\r\n\rbar\n\rpiyo');
         });
+        it("realizes 'oneline' tag", function () {
+            const oneline = createHeredoc({inputNewline: '\n', outputNewline: ''});
+
+            equal(oneline`
+                あなたとジャバ
+                今すぐダウンロー
+                ド
+            `, 'あなたとジャバ今すぐダウンロード');
+
+            const oneline2 = createHeredoc({inputNewline: '\n', outputNewline: ' '});
+
+            equal(oneline2`
+                This is very very long
+                text. blah blah blah...
+                blah...
+            `, 'This is very very long text. blah blah blah... blah...');
+        });
     });
 });
