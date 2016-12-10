@@ -82,12 +82,13 @@ assert.equal(heredoc`\tfoo\t  bar\t\tpiyo`, 'foo\n  bar      \npiyo');
 
 And default newline is NL (`\n`).
 
-These behaviors can be customized. There are two options; `tabSize` and `newline`.
+These behaviors can be customized. There are two options; `tabSize`, `inputNewline` and `outputNewline`.
 
 ```javascript
 const heredoc = require('heredocument')({
     tabSize: 4,
-    newline: '\n\r',
+    inputNewline: '\n\r',
+    outputNewline: '\n\r',
 });
 
 assert.equal(
@@ -102,7 +103,30 @@ assert.equal(
 ```
 
 - **tabSize** : The number of whitespaces for 1 tab character (`\t`). Default is `8`.
-- **newline** : The newline character to split the string into lines. This package will maintain the newline before/after of trimming. Default value is `\n`.
+- **inputNewline** : The newline character to split the string into lines. Default value is `\n`.
+- **outputNewline** : The newline character used in output string. If not specified, value of `inputNewline` is used. Default value is `\n`.
+
+By using the options, you can cusomize the behavior of `heredoc` tag.
+
+For example, below `oneline` tag replaces all newlines in input hence it can create single line string from multiline template string.
+
+```javascript
+const heredoc = require('heredocument');
+const oneline = heredoc({
+    inputNewline: '\n',
+    outputNewline: ' '
+});
+
+const msg = oneline`
+    This message is too long. So we need to split the string literal such as
+    "blah blah" + "blah blah". But with this 'oneline' tag, all newlines
+    (including intepolated string) are removed and you can get oneline
+    string.
+`;
+
+assert.equal(msg, `This message is too long. So we need to split the string literal such as "blah blah" + "blah blah". But with this 'oneline' tag, all newlines (including intepolated string) are removed and you can get oneline string.`);
+// => OK
+```
 
 ## Development
 

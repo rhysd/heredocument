@@ -1,7 +1,7 @@
 const RE_EMPTY_LINE = /^\s*$/;
 const DEFAULT_OPTIONS = {
     tabSize: 8,
-    newline: '\n'
+    inputNewline: '\n'
 };
 
 function getTrimmedLines(strings, args, opts) {
@@ -13,7 +13,7 @@ function getTrimmedLines(strings, args, opts) {
         }
     });
 
-    const lines = input.join('').split(opts.newline);
+    const lines = input.join('').split(opts.inputNewline);
 
     // Note: Trim first/last lines
     if (lines.length > 0 && lines[0].length === 0) {
@@ -97,7 +97,7 @@ function heredoc(strings, ...args) {
 
     const pad = getPadLength(lines, this);
     if (pad <= 0) {
-        return lines.join(this.newline);
+        return lines.join(this.outputNewline || this.inputNewline);
     }
 
     for (let i = 0; i < lines.length; ++i) {
@@ -113,7 +113,7 @@ function heredoc(strings, ...args) {
         lines[i] = line;
     }
 
-    return lines.join(this.newline);
+    return lines.join(this.outputNewline || this.inputNewline);
 }
 
 const exported = heredoc.bind(DEFAULT_OPTIONS);
