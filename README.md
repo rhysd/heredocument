@@ -3,6 +3,7 @@ Here Document Using ES2015 Template String
 
 This package provides heredoc as tag of [ES2015 Template String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 It trims white spaces in the template string and strips common indentation like `<<~` in Ruby.
+This package has no dependency.
 
 ```javascript
 const heredoc = require('heredocument');
@@ -105,8 +106,6 @@ assert.equal(
 - **tabSize** : The number of whitespaces for 1 tab character (`\t`). Default is `8`.
 - **inputNewline** : The newline character to split the string into lines. Default value is `\n`.
 - **outputNewline** : The newline character used in output string. If not specified, value of `inputNewline` is used. Default value is `\n`.
-
-By using the options, you can cusomize the behavior of `heredoc` tag.
 
 For example, below `oneline` tag replaces all newlines in input hence it can create single line string from multiline template string.
 
