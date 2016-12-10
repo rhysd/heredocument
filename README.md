@@ -72,22 +72,6 @@ console.log(`
 `);
 ```
 
-For another situation, `oneline` tag is also exported as a member of package.
-
-```javascript
-const {oneline} = require('heredocument');
-
-const msg = oneline`
-    This message is too long. So we need to split the string literal such as
-    "blah blah" + "blah blah". But with this 'oneline' tag, all newlines
-    (including intepolated string) are removed and you can get oneline
-    string.
-`;
-
-assert.equal(msg, `This message is too long. So we need to split the string literal such as "blah blah" + "blah blah". But with this 'oneline' tag, all newlines (including intepolated string) are removed and you can get oneline string.`);
-// => OK
-```
-
 This package cares about tab (`\t`) character. By default, tab character is handled as 8 whitespaces.
 If the indentation is split at the middle of tab character, it will be split into white spaces.
 
@@ -98,13 +82,12 @@ assert.equal(heredoc`\tfoo\t  bar\t\tpiyo`, 'foo\n  bar      \npiyo');
 
 And default newline is NL (`\n`).
 
-These behaviors can be customized. There are three options; `tabSize`, `newline` and `oneline`.
+These behaviors can be customized. There are two options; `tabSize` and `newline`.
 
 ```javascript
 const heredoc = require('heredocument')({
     tabSize: 4,
     newline: '\n\r',
-    oneline: true
 });
 
 assert.equal(
@@ -120,7 +103,6 @@ assert.equal(
 
 - **tabSize** : The number of whitespaces for 1 tab character (`\t`). Default is `8`.
 - **newline** : The newline character to split the string into lines. This package will maintain the newline before/after of trimming. Default value is `\n`.
-- **oneline** : If this value is `true`, the string will be concat with `' '` and lose all newlines in the string. The default value is `false`.
 
 ## Development
 
