@@ -8,6 +8,7 @@
   },
   "plugins": [
     "promise",
+    "mocha",
     "node"
   ],
   "rules": {
@@ -17,6 +18,24 @@
     "comma-dangle": ["error", "never"],
     "promise/param-names": "error",
     "promise/always-return": "error",
-    "promise/catch-or-return": "error"
+    "promise/catch-or-return": "error",
+
+    "mocha/handle-done-callback": "error",
+    "mocha/max-top-level-suites": "off",
+    "mocha/no-exclusive-tests": "error",
+    "mocha/no-global-tests": "error",
+    "mocha/no-hooks-for-single-case": "error",
+    "mocha/no-hooks": "error",
+    "mocha/no-identical-title": "error",
+    "mocha/no-mocha-arrows": "error",
+    "mocha/no-nested-tests": "error",
+    "mocha/no-pending-tests": "error",
+    "mocha/no-return-and-callback": "error",
+    "mocha/no-sibling-hooks": "error",
+    "mocha/no-skipped-tests": "error",
+    "mocha/no-synchronous-tests": "off",
+    "mocha/no-top-level-hooks": "off",
+    "mocha/valid-suite-description": "off",
+    "mocha/valid-test-description": "off"
   }
 }

@@ -6,6 +6,11 @@
   "engines": {
     "node": ">=6"
   },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "index.js"
+  ],
   "scripts": {
     "lint": "eslint index.js test/*.js",
     "test": "mocha test/"
@@ -28,6 +33,7 @@
   "homepage": "https://github.com/rhysd/heredocument#readme",
   "devDependencies": {
     "eslint": "^3.11.1",
+    "eslint-plugin-mocha": "^4.7.0",
     "eslint-plugin-node": "^3.0.5",
     "eslint-plugin-promise": "^3.4.0",
     "mocha": "^3.2.0"
