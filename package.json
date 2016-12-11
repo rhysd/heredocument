@@ -18,6 +18,7 @@
     "tsc": "tsc -p dts-test/",
     "test": "npm run mocha && npm run tsc",
     "coverage": "istanbul cover _mocha -- test/",
+    "bench": "node bench/index.js",
     "preversion": "npm test",
     "watch": "guard"
   },
@@ -40,6 +41,7 @@
   },
   "homepage": "https://github.com/rhysd/heredocument#readme",
   "devDependencies": {
+    "benchmark": "^2.1.2",
     "eslint": "^3.11.1",
     "eslint-plugin-mocha": "^4.7.0",
     "eslint-plugin-node": "^3.0.5",
