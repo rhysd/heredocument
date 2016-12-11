@@ -13,7 +13,8 @@
   ],
   "scripts": {
     "lint": "eslint index.js test/*.js",
-    "test": "mocha test/"
+    "test": "mocha test/",
+    "watch": "guard"
   },
   "repository": {
     "type": "git",

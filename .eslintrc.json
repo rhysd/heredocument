@@ -7,7 +7,6 @@
     "mocha": true
   },
   "plugins": [
-    "promise",
     "mocha",
     "node"
   ],
