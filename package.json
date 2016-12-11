@@ -16,6 +16,7 @@
     "mocha": "mocha test/",
     "tsc": "tsc -p dts-test/",
     "test": "npm run mocha && npm run tsc",
+    "coverage": "istanbul cover _mocha -- test/",
     "watch": "guard"
   },
   "repository": {
@@ -40,6 +41,7 @@
     "eslint": "^3.11.1",
     "eslint-plugin-mocha": "^4.7.0",
     "eslint-plugin-node": "^3.0.5",
+    "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "typescript": "^2.1.4"
   }
