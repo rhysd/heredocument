@@ -18,7 +18,7 @@ function showError(err) {
           Actual  : ${err.actual}
     `;
 
-    assert.equal(msg, 'Error on blah blah\n\n  Expected: foo\n  Actual  : bar');
+    assert.equal(msg, 'Error: blah blah\n\n  Expected: foo\n  Actual  : bar');
 
     console.log(msg);
 }
@@ -27,7 +27,7 @@ function showError(err) {
 Without this package, we need to care about indentation of the string.
 
 ```javascript
-    const msg = `${err.message}
+    const msg = `Error: ${err.message}
 
   Expected: ${err.expected}
   Actual  : ${err.actual}`;
