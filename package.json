@@ -19,6 +19,7 @@
     "test": "npm run mocha && npm run tsc",
     "coverage": "istanbul cover _mocha -- test/",
     "bench": "node bench/index.js",
+    "profile": "node --prof bench/prof.js && node --prof-process isolate-*-v8.log && rm isolate-*-v8.log",
     "preversion": "npm test",
     "watch": "guard"
   },

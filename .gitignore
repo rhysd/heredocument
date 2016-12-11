@@ -3,3 +3,4 @@
 /npm-debug.log.*
 /dts-test/test.js
 /coverage
+/isolate-*-v8.log
