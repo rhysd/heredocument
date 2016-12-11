@@ -1,5 +1,7 @@
 Here Document Using ES2015 Template String
 ==========================================
+[![Build Status](https://travis-ci.org/rhysd/heredocument.svg?branch=master)](https://travis-ci.org/rhysd/heredocument)
+[![Coverage Status](https://coveralls.io/repos/github/rhysd/heredocument/badge.svg?branch=master)](https://coveralls.io/github/rhysd/heredocument?branch=master)
 
 This package provides heredoc as tag of [ES2015 Template String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 It trims white spaces in the template string and strips common indentation like `<<~` in Ruby.
@@ -10,7 +12,7 @@ const heredoc = require('heredocument');
 
 function showError(err) {
     const msg = heredoc`
-        ${err.message}
+        Error: ${err.message}
 
           Expected: ${err.expected}
           Actual  : ${err.actual}
