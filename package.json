@@ -13,7 +13,9 @@
   ],
   "scripts": {
     "lint": "eslint index.js test/*.js",
-    "test": "mocha test/",
+    "mocha": "mocha test/",
+    "tsc": "tsc -p dts-test/",
+    "test": "npm run mocha && npm run tsc",
     "watch": "guard"
   },
   "repository": {
@@ -38,6 +40,7 @@
     "eslint": "^3.11.1",
     "eslint-plugin-mocha": "^4.7.0",
     "eslint-plugin-node": "^3.0.5",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "typescript": "^2.1.4"
   }
 }
