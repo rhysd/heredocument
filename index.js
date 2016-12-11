@@ -42,8 +42,7 @@ function indentOf(line, opts) {
     return count;
 }
 
-// Precondition: lines.length > 0
-function getPadLength(lines, opts) {
+function commonIndentFromLines(lines, opts) {
     let pad = -1;
     lines.forEach(l => {
         if (l.length === 0) {
@@ -96,7 +95,7 @@ function heredoc(strings, ...args) {
     }
 
     const newline = this.outputNewline !== undefined ? this.outputNewline : this.inputNewline;
-    const pad = getPadLength(lines, this);
+    const pad = commonIndentFromLines(lines, this);
     if (pad <= 0) {
         return lines.join(newline);
     }
@@ -119,6 +118,7 @@ function heredoc(strings, ...args) {
 
 const exported = heredoc.bind(DEFAULT_OPTIONS);
 exported.DEFAULT_OPTIONS = DEFAULT_OPTIONS;
+exported.commonIndentFromLines = commonIndentFromLines;
 
 if (typeof module !== 'undefined') {
     exported.default = exported;
