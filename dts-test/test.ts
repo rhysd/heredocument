@@ -8,6 +8,7 @@ console.log(heredoc`
 
 const oneline = heredoc({
     outputNewline: ' ',
+    newlineAtEnd: false,
 });
 
 console.log(oneline`

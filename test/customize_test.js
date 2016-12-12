@@ -30,7 +30,10 @@ describe('heredoc(options)', function () {
             equal(heredoc`  foo\n\n bar\n piyo`, ' foo\n\r\n\rbar\n\rpiyo');
         });
         it("realizes 'oneline' tag", function () {
-            const oneline = createHeredoc({inputNewline: '\n', outputNewline: ''});
+            const oneline = createHeredoc({
+                inputNewline: '\n',
+                outputNewline: ''
+            });
 
             equal(oneline`
                 あなたとジャバ
@@ -38,7 +41,11 @@ describe('heredoc(options)', function () {
                 ド
             `, 'あなたとジャバ今すぐダウンロード');
 
-            const oneline2 = createHeredoc({inputNewline: '\n', outputNewline: ' '});
+            const oneline2 = createHeredoc({
+                inputNewline: '\n',
+                outputNewline: ' ',
+                newlineAtEnd: false
+            });
 
             equal(oneline2`
                 This is very very long

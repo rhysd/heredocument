@@ -1,7 +1,8 @@
 const RE_EMPTY_LINE = /^\s*$/;
 const DEFAULT_OPTIONS = {
     tabSize: 8,
-    inputNewline: '\n'
+    inputNewline: '\n',
+    newlineAtEnd: true
 };
 
 function getTrimmedLines(strings, args, opts) {
@@ -23,7 +24,14 @@ function getTrimmedLines(strings, args, opts) {
 
     const lastIndex = lines.length - 1;
     if (lines.length > 0 && RE_EMPTY_LINE.test(lines[lastIndex])) {
-        lines[lastIndex] = '';
+        if (opts.newlineAtEnd) {
+            lines[lastIndex] = '';
+        } else {
+            // When EOL at the end of string should not be added,
+            // it means that simply remove the empty line at the end
+            // of string.
+            lines.pop();
+        }
     }
 
     return lines;

@@ -18,7 +18,7 @@ function showError(err) {
           Actual  : ${err.actual}
     `;
 
-    assert.equal(msg, 'Error: blah blah\n\n  Expected: foo\n  Actual  : bar');
+    assert.equal(msg, 'Error: blah blah\n\n  Expected: foo\n  Actual  : bar\n');
 
     console.log(msg);
 }
@@ -30,7 +30,8 @@ Without this package, we need to care about indentation of the string.
     const msg = `Error: ${err.message}
 
   Expected: ${err.expected}
-  Actual  : ${err.actual}`;
+  Actual  : ${err.actual}
+`;
 ```
 
 ## Installation
@@ -100,7 +101,7 @@ assert.equal(
         BAR
 		BAZ
     `,
-    'FOO\n    BAR\n\tBAZ'
+    'FOO\n    BAR\n\tBAZ\n'
 );
 // => OK
 ```
@@ -108,6 +109,7 @@ assert.equal(
 - **tabSize** : The number of whitespaces for 1 tab character (`\t`). Default is `8`.
 - **inputNewline** : The newline character to split the string into lines. Default value is `\n`.
 - **outputNewline** : The newline character used in output string. If not specified, value of `inputNewline` is used. Default value is `\n`.
+- **newlineAtEnd** : EOL should be added at the end of string or not. If `true`, newline will be added at the end. Default value is `true`.
 
 For example, below `oneline` tag replaces all newlines in input hence it can create single line string from multiline template string.
 
@@ -115,7 +117,8 @@ For example, below `oneline` tag replaces all newlines in input hence it can cre
 const heredoc = require('heredocument');
 const oneline = heredoc({
     inputNewline: '\n',
-    outputNewline: ' '
+    outputNewline: ' ',
+    newlineAtEnd: false
 });
 
 const msg = oneline`

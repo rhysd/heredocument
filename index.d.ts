@@ -2,6 +2,7 @@ export interface HeredocOptions {
     tabSize?: number;
     inputNewline?: string;
     outputNewline?: string;
+    newlineAtEnd?: boolean;
 }
 
 export interface Heredoc {
