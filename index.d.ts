@@ -6,7 +6,7 @@ export interface HeredocOptions {
 }
 
 export interface Heredoc {
-    (strings: string[], ...interpolations: string[]): string;
+    (strings: TemplateStringsArray, ...interpolations: string[]): string;
     (opts: HeredocOptions): Heredoc;
 }
 
