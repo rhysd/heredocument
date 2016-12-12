@@ -7,12 +7,12 @@ const DEFAULT_OPTIONS = {
 
 function getTrimmedLines(strings, args, opts) {
     const input = [];
-    strings.forEach((s, i) => {
-        input.push(s);
+    for (let i = 0; i < strings.length; ++i) {
+        input.push(strings[i]);
         if (args.length > i) {
             input.push(args[i]);
         }
-    });
+    }
 
     const lines = input.join('').split(opts.inputNewline);
 
@@ -54,22 +54,22 @@ function indentOf(line, opts) {
 
 function commonIndentFromLines(lines, opts) {
     let pad = -1;
-    lines.forEach(l => {
+    for (const l of lines) {
         if (l.length === 0) {
-            return; // continue
+            continue;
         }
         if (pad < 0) {
             pad = indentOf(l, opts);
-            return;
+            continue;
         }
         pad = Math.min(pad, indentOf(l, opts));
-    });
+    }
 
     // pad < 0 means there are empty lines only
     return pad >= 0 ? pad : 0;
 }
 
-function charsToSlice(line, pad, opts) {
+function trimCommonIndent(pad, line, opts) {
     let idx = 0;
     while (pad > 0) {
         if (line[idx] === ' ') {
@@ -81,12 +81,12 @@ function charsToSlice(line, pad, opts) {
         }
         ++idx;
     }
+
     if (pad === 0) {
-        return [idx];
-    } else {
-        // When the indent is broken in tab character, the tab character should be split into spaces
-        return [idx, -pad];
+        return line.slice(idx);
     }
+
+    return ' '.repeat(-pad) + line.slice(idx);
 }
 
 function heredoc(strings, ...args) {
@@ -115,12 +115,8 @@ function heredoc(strings, ...args) {
         if (l.length === 0) {
             continue;
         }
-        const counts = charsToSlice(l, pad, this);
-        let line = l.slice(counts[0]);
-        if (counts[1] !== undefined) {
-            line = ' '.repeat(counts[1]) + line;
-        }
-        lines[i] = line;
+
+        lines[i] = trimCommonIndent(pad, l, this);
     }
 
     return lines.join(newline);
