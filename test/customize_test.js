@@ -12,7 +12,7 @@ describe('heredoc(options)', function () {
             equal(heredoc`
             foo
         bar
-            `, '    foo\nbar');
+            `, '    foo\nbar\n');
         });
     });
 

@@ -20,7 +20,8 @@ describe('heredoc`...`', function () {
 
     42
 
-end.`;
+end.
+`;
 
         equal(s, expected);
 
@@ -33,7 +34,8 @@ end.`;
         const expected_java =
 ` あなたとジャバ
 今すぐダウンロー
-       ド`;
+       ド
+`;
 
         equal(java, expected_java);
     });

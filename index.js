@@ -15,13 +15,15 @@ function getTrimmedLines(strings, args, opts) {
 
     const lines = input.join('').split(opts.inputNewline);
 
-    // Note: Trim first/last lines
+    // Note: Trim first newline just after first '`'
     if (lines.length > 0 && lines[0].length === 0) {
         // Newline just after first ` it should be split to ''
         lines.shift();
     }
-    if (lines.length > 0 && RE_EMPTY_LINE.test(lines[lines.length - 1])) {
-        lines.pop();
+
+    const lastIndex = lines.length - 1;
+    if (lines.length > 0 && RE_EMPTY_LINE.test(lines[lastIndex])) {
+        lines[lastIndex] = '';
     }
 
     return lines;

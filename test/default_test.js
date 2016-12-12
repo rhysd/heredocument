@@ -12,10 +12,10 @@ describe('heredoc`...`', function () {
 
     it('trims last empty line', function () {
         equal(heredoc`aaa
-        `, 'aaa');
+        `, 'aaa\n');
         equal(heredoc`             aaa
             bbb
-        `, ' aaa\nbbb');
+        `, ' aaa\nbbb\n');
     });
 
     it('removes common indentation', function () {
@@ -26,38 +26,38 @@ describe('heredoc`...`', function () {
  aa
   bb
  cc
-        `, 'aa\n bb\ncc');
+        `, 'aa\n bb\ncc\n');
 
         equal(heredoc`
   aa
  bb
  cc
-        `, ' aa\nbb\ncc');
+        `, ' aa\nbb\ncc\n');
 
         equal(heredoc`
  aa
  bb
   cc
-        `, 'aa\nbb\n cc');
+        `, 'aa\nbb\n cc\n');
 
         equal(heredoc`
 aa
 bb
 cc
-        `, 'aa\nbb\ncc');
+        `, 'aa\nbb\ncc\n');
 
         // When including whitespaces only line
         equal(heredoc`
  a
   
  c
-        `, 'a\n \nc');
+        `, 'a\n \nc\n');
 
         equal(heredoc`
   a
  
   c
-        `, ' a\n\n c');
+        `, ' a\n\n c\n');
     });
 
     it('ignores empty lines', function () {
@@ -66,7 +66,7 @@ cc
              bb
 
             cc
-        `, 'aa\n bb\n\ncc');
+        `, 'aa\n bb\n\ncc\n');
 
         equal(heredoc`
 aa
@@ -74,25 +74,25 @@ aa
 bb
 
 cc
-        `, 'aa\n\nbb\n\ncc');
+        `, 'aa\n\nbb\n\ncc\n');
 
         equal(heredoc`
 
             aa
             bb
-        `, '\naa\nbb');
+        `, '\naa\nbb\n');
 
         equal(heredoc`
             aa
 
             bb
-        `, 'aa\n\nbb');
+        `, 'aa\n\nbb\n');
 
         equal(heredoc`
             aa
             bb
 
-        `, 'aa\nbb\n');
+        `, 'aa\nbb\n\n');
     });
 
     it('can deal with empty line', function () {
@@ -101,12 +101,12 @@ cc
         `, '');
         equal(heredoc`
 
-        `, '');
+        `, '\n');
         equal(heredoc`
 
 
 
-        `, '\n\n');
+        `, '\n\n\n');
     });
 
     it('deals with tab character as 8 whitespaces', function () {
@@ -114,37 +114,37 @@ cc
 		foo
 		bar
 		piyo
-        `, 'foo\nbar\npiyo');
+        `, 'foo\nbar\npiyo\n');
         equal(heredoc`
 		foo
 			bar
 		piyo
-        `, 'foo\n	bar\npiyo');
+        `, 'foo\n	bar\npiyo\n');
         equal(heredoc`
 			foo
 			bar
 		piyo
-        `, '	foo\n	bar\npiyo');
+        `, '	foo\n	bar\npiyo\n');
         equal(heredoc`
 		 foo
                 bar
 		piyo
-        `, ' foo\nbar\npiyo');
+        `, ' foo\nbar\npiyo\n');
         equal(heredoc`
 		  foo
 		    bar
 			piyo
-        `, 'foo\n  bar\n      piyo');
+        `, 'foo\n  bar\n      piyo\n');
         equal(heredoc`
 			foo
 		    bar
 		  piyo
-        `, '      foo\n  bar\npiyo');
+        `, '      foo\n  bar\npiyo\n');
         equal(heredoc`
 	  	foo
 		    bar
   		  piyo
-        `, 'foo\n  bar\n  piyo');
+        `, 'foo\n  bar\n  piyo\n');
     });
 });
 
