@@ -3,17 +3,21 @@ const heredoc = require('..');
 
 const suite = new Benchmark.Suite();
 
+let i = 0;
+let j = 0;
+let b = false
+
 suite.add('heredoc``', () => {
     heredoc`
-        The answer is ${42}.
-        It's ${true}.
+        The answer is ${++i}.
+        It's ${b = !b}.
 
             Note: This is test for benchmark.
     `
 }).add('plain template string', () => {
     `
-        The answer is ${42}.
-        It's ${true}.
+        The answer is ${++j}.
+        It's ${b = !b}.
 
             Note: This is test for benchmark.
     `

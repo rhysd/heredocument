@@ -1,8 +1,9 @@
 const heredoc = require('..');
-for (let i = 0; i < 10000; ++i) {
+let b = false;
+for (let i = 0; i < 1000000; ++i) {
     heredoc`
-        The answer is ${42}.
-        It's ${true}.
+        The answer is ${i}.
+        It's ${b = !b}.
 
             Note: This is test for benchmark.
     `
