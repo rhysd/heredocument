@@ -1,6 +1,6 @@
 {
   "name": "heredocument",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Here document built on ES2015 template string literals like Ruby's <<~",
   "main": "index.js",
   "engines": {
