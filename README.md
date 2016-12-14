@@ -39,7 +39,7 @@ Without this package, we need to care about indentation of the string.
 Available via [npm](https://www.npmjs.com).
 
 ```
-$ npm install heredocument
+$ npm install --save heredocument
 ```
 
 - commonjs
@@ -136,11 +136,11 @@ assert.equal(msg, `This message is too long. So we need to split the string lite
 
 ```sh
 $ git clone https://github.com/rhysd/heredocument.git && cd ./heredocument
-$ npm install  # Install all dependencies
-$ npm run lint # Run linter
-$ npm test     # Run tests with mocha
-$ npm bench    # Run benchmark
-$ npm profile  # Run profiling
+$ npm install     # Install all dependencies
+$ npm run lint    # Run linter
+$ npm test        # Run tests with mocha
+$ npm run bench   # Run benchmark
+$ npm run profile # Run profiling
 ```
 
 ## License
