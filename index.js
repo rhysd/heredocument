@@ -129,6 +129,7 @@ exported.commonIndentFromLines = commonIndentFromLines;
 if (typeof module !== 'undefined') {
     exported.default = exported;
     module.exports = exported;
-} else if (typeof window !== 'undefined') {
+}
+if (typeof window !== 'undefined') {
     window.heredoc = exported;
 }
