@@ -131,5 +131,5 @@ if (typeof module !== 'undefined') {
     module.exports = exported;
 }
 if (typeof window !== 'undefined') {
-    window.heredoc = exported;
+    window.Heredoc = exported;
 }
