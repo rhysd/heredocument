@@ -57,7 +57,7 @@ import heredoc from 'heredocument';
 - Browser
 
 ```html
-<script src="/path/to/heredocument/index.js"></script>
+<script src="/path/to/heredocument/index.es5.min.js"></script>
 <script>
   const heredoc = window.Heredoc;
 </script>
@@ -141,6 +141,7 @@ $ npm run lint    # Run linter
 $ npm test        # Run tests with mocha
 $ npm run bench   # Run benchmark
 $ npm run profile # Run profiling
+$ npm run minify  # Make index.es5.min.js
 ```
 
 ## License

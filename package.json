@@ -10,6 +10,7 @@
     "LICENSE",
     "README.md",
     "index.js",
+    "index.es5.min.js",
     "index.d.ts"
   ],
   "scripts": {
@@ -20,7 +21,8 @@
     "coverage": "istanbul cover _mocha -- test/",
     "bench": "node bench/index.js",
     "profile": "node --prof bench/prof.js && node --prof-process isolate-*-v8.log && rm isolate-*-v8.log",
-    "preversion": "npm test",
+    "minify": "babel index.js > index.es5.js && uglifyjs index.es5.js > index.es5.min.js",
+    "preversion": "npm test && npm run minify",
     "watch": "guard"
   },
   "repository": {
@@ -42,12 +44,15 @@
   },
   "homepage": "https://github.com/rhysd/heredocument#readme",
   "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
     "benchmark": "^2.1.2",
     "eslint": "^3.11.1",
     "eslint-plugin-mocha": "^4.7.0",
     "eslint-plugin-node": "^3.0.5",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
-    "typescript": "^2.1.4"
+    "typescript": "^2.1.4",
+    "uglifyjs": "^2.4.10"
   }
 }
